@@ -1,12 +1,12 @@
 // Using SDK sample
-const { AptDomain } = require('../src/index');
+const { SuiDomain } = require('../src/index');
 
-var aptdomain=new AptDomain( {network:'testnet'} );
+var suidomain=new SuiDomain( {network:'testnet'} );
 
 async function ReverseAddressName(input_address, cb) {
     if( input_address.startsWith('0x') ){
 
-        let { domain } = await aptdomain.reverse( input_address);
+        let { domain } = await suidomain.reverse( input_address);
         if( domain ) {
             //got a domain bind on this address
             cb(input_address,domain);
@@ -14,7 +14,7 @@ async function ReverseAddressName(input_address, cb) {
     }
 }
 
-const input_address = '0x879b4e92b720ead64a8218e9b4cced26825e88e9923ef8b5eb4d610967433c45';
+const input_address = '0x0d24362b397b46d020ad66ae287bb612d0abcbda4787c40b98568ef4be1f9ca4';
 
 ReverseAddressName(input_address,function(address,domain){
     
