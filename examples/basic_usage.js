@@ -6,7 +6,7 @@ const { SuiDomain } = require('../src/index');
 		//
 		// set network 'mainnet' / 'testnet' / 'devnet', default: 'mainnet' 
 		//
-		network: 'devnet'
+		network: 'testnet'
 
 		//
 		// Or you can set the node url and contract address
@@ -26,7 +26,7 @@ const { SuiDomain } = require('../src/index');
 
 	let suidomain=new SuiDomain(opt);
 
-	const test_domain = 'rrrfff@sui';
+	const test_domain = 'test007@sui';
 	const test_address = '0x0d24362b397b46d020ad66ae287bb612d0abcbda4787c40b98568ef4be1f9ca4';
 	
 	///////////////////////////////////////////
@@ -37,7 +37,6 @@ const { SuiDomain } = require('../src/index');
 
 	let { domain } = await suidomain.reverse( test_address );
 	console.log( `[promise] ${test_address} => ${domain}` );
-	return;
 
 	let data = await suidomain.getDomainRecord(test_domain);
 	console.log( `[promise] ${test_domain} => ${JSON.stringify(data,null,'  ')}` );
