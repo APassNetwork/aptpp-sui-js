@@ -189,6 +189,16 @@ class SuiDomain {
 		return null;
 	}
 
+	str_to_u8arr(str) {
+		let vec = [];
+		let buf = Buffer.from(str);
+		let len = buf.length;
+		for (let x = 0; x < len; x++) {
+			vec.push(buf[x]);
+		}
+		return vec;
+	}
+
 	async _get_globalmap() {
 		try {
 			//If init
@@ -223,7 +233,7 @@ class SuiDomain {
 
 			const cur = await this._client.getDynamicFieldObject({
 				parentId: globalmap.domain2addr.fields.id.id,
-				name: { type: 'vector<u8>', value: domain }
+				name: { type: 'vector<u8>', value: this.str_to_u8arr(domain) }
 			});
 
 			if (!cur || !cur.data) {
@@ -235,6 +245,7 @@ class SuiDomain {
 			}
 		} catch (e) {
 			//not found
+
 			if (e.status == ErrorNotFound) ret = { status: ErrorNotFound, address: null };
 		}
 		if (cb) cb(ret.status, ret.address);
@@ -305,7 +316,7 @@ class SuiDomain {
 
 			const obj = await this._client.getDynamicFieldObject({
 				parentId: globalmap.domains.fields.id.id,
-				name: { type: 'vector<u8>', value: domain }
+				name: { type: 'vector<u8>', value: this.str_to_u8arr(domain) }
 			});
 
 			if (!obj) {
